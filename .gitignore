@@ -1,5 +1,6 @@
 # hides keys
 secrets2.py
 
-#hides secrets2 cache
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
