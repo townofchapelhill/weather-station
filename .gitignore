@@ -2,4 +2,4 @@
 secrets2.py
 
 #hides secrets2 cache
-/__pycache__
+__pycache__/
