@@ -1,2 +1,5 @@
 # hides keys
 secrets2.py
+
+#hides secrets2 cache
+/__pycache__
