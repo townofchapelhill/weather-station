@@ -8,7 +8,7 @@ try:
 	import requests
 	import csv
 	import secrets
-	import os
+	import os 
 	import traceback
 except: 
 	ambientweatherlog.write("Issue importing. \n")
@@ -36,25 +36,27 @@ def get_data(info_sheet):
 	print(weather_info)
 	
 	# writes weather data to CSV
-	info_sheet.write(str(weather_info[2]['tempf']) + " F, ")
-	info_sheet.write(str(weather_info[4]['humidity']) + "%, ")
-	info_sheet.write(str(weather_info[5]['windspeedmph']) + " mph, ")
-	info_sheet.write(str(weather_info[6]['windgustmph']) + " mph, ")
-	info_sheet.write(str(weather_info[12]['dailyrainin']) + " in, ")
-	info_sheet.write(str(weather_info[14]['monthlyrainin']) + " in, ")
-	info_sheet.write(str(weather_info[15]['yearlyrainin']) + " in, ")
-	info_sheet.write(str(weather_info[17]['uv']) + " (0-11+), ")
-	info_sheet.write(str(weather_info[20]['date']) + "\n")
+	a = str(weather_info[2]['tempf'])
+	b = str(weather_info[4]['humidity'])
+	c = str(weather_info[5]['windspeedmph'])
+	d = str(weather_info[6]['windgustmph'])
+	e = str(weather_info[12]['dailyrainin'])
+	f = str(weather_info[14]['monthlyrainin'])
+	g = str(weather_info[15]['yearlyrainin'])
+	h = str(weather_info[17]['uv'])
+	i = str(weather_info[20]['date']) + "\n"
+
+	info_sheet.write(a + "," + b + "," + c + "," + d + ","+ e + "," + f + "," + g + "," + h + "," + i) 
 	
 	
 # main function to create log and call get_data	
 def main():
-	info_sheet = open("//CHFS/Shared Documents/OpenData/datasets/staging/ambient-weather.csv", "a")
+	info_sheet = open("ambient-weather.csv", "a")
 
-	# if there is data in the response, write CSV headers
-	if os.stat("//CHFS/Shared Documents/OpenData/datasets/staging/ambient-weather.csv").st_size == 0:
+	#if there is data in the response, write CSV headers
+	if os.stat("ambient-weather.csv").st_size == 0:
 		info_sheet.write("Temperature (f), Humidity, Wind Speed (mph), Wind Gust (mph), Daily Rain (in), Monthly Rain (in), Yearly Rain (in), UV, Date \n")
-		
+		#info_sheet.writerow(str(weather_info[2]['tempf']), str(weather_info[4]['humidity']), str(weather_info[5]['windspeedmph']), str(weather_info[6]['windgustmph']), str(weather_info[12]['dailyrainin']), str(weather_info[14]['monthlyrainin']), str(weather_info[15]['yearlyrainin']),str(weather_info[17]['uv']), str(weather_info[20]['date']) + "\n")
 	get_data(info_sheet)
 	info_sheet.close()
 
