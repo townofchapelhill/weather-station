@@ -10,6 +10,7 @@ try:
 	import secrets
 	import os
 	import traceback
+	import filename_secrets
 except: 
 	ambientweatherlog.write("Issue importing. \n")
 
@@ -25,7 +26,6 @@ def get_weather_info():
 	else:
 		print(response.status_code)
 		return None
-
 
 # get data and style it for csv writing
 def get_data(info_sheet):
@@ -49,10 +49,11 @@ def get_data(info_sheet):
 	
 # main function to create log and call get_data	
 def main():
-	info_sheet = open("//CHFS/Shared Documents/OpenData/datasets/staging/ambient-weather.csv", "a")
+	infofilename = os.path.join(filename_secrets.productionStaging, "ambient-weather.csv")
+	info_sheet = open(infofilename, "a")
 
 	# if there is data in the response, write CSV headers
-	if os.stat("//CHFS/Shared Documents/OpenData/datasets/staging/ambient-weather.csv").st_size == 0:
+	if os.stat(infofilename).st_size == 0:
 		info_sheet.write("Temperature (f), Humidity, Wind Speed (mph), Wind Gust (mph), Daily Rain (in), Monthly Rain (in), Yearly Rain (in), UV, Date \n")
 		
 	get_data(info_sheet)
